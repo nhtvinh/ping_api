@@ -282,5 +282,4 @@ typedef struct ping_func_set_st {
 } ping_func_set_st;
 
 int ping4_api(char *target);
-void ping4_reset(void);
 
