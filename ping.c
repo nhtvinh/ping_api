@@ -181,7 +181,7 @@ static int create_socket(socket_st *sock, int family, int socktype, int protocol
 	return 1;
 }
 
-void ping4_reset(void)
+static void ping4_reset(void)
 {
 	memset(&data,0, sizeof data);
 	data.blocking = 0;
@@ -221,6 +221,9 @@ int ping4_api(char *target)
 	struct addrinfo hints = { .ai_family = AF_UNSPEC, .ai_protocol = IPPROTO_UDP, .ai_socktype = SOCK_DGRAM, .ai_flags = getaddrinfo_flags };
 	struct addrinfo *ai = NULL;
 	socket_st sock = { .fd = -1 };
+	
+	/* Reset data before starting ping function */
+	ping4_reset();
 	
 	if (getaddrinfo(target, NULL, &hints, &result)){
 		return 0;
